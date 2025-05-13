@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device & Sensor Form</title>
+</head>
+<body>
+    <h2>Thêm Device</h2>
+    <form id="deviceForm">
+        <input type="text" id="deviceName" placeholder="Tên thiết bị" required>
+        <input type="text" id="deviceType" placeholder="Loại thiết bị" required>
+        <input type="text" id="ownerId" placeholder="ID Chủ sở hữu" required>
+        <button type="submit">Gửi</button>
+    </form>
+
+    <h2>Thêm Sensor</h2>
+    <form id="sensorForm">
+        <input type="text" id="sensorName" placeholder="Tên cảm biến" required>
+        <input type="text" id="sensorType" placeholder="Loại cảm biến" required>
+        <input type="text" id="sensorOwnerId" placeholder="ID Chủ sở hữu" required>
+        <button type="submit">Gửi</button>
+    </form>
+
+    <h2>Thêm Sensor Data</h2>
+    <form id="sensorDataForm">
+        <input type="text" id="sensorId" placeholder="ID Cảm biến" required>
+        <input type="number" id="sensorValue" placeholder="Giá trị đo" required>
+        <button type="submit">Gửi</button>
+    </form>
+    <a href="http://localhost:5000/api/devices">Lấy thông tin device</a>
+    <a href="http://localhost:5000/api/sensors">Lấy thông tin sensor</a>
+    <a href="http://localhost:5000/api/sensordata">Lấy thông tin sensor-data</a>
+    
+
+    <script>
+        async function postData(url, data) {
+            try {
+                const response = await fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(data)
+                });
+                const result = await response.json();
+                console.log(result);
+                alert("Gửi thành công!");
+            } catch (error) {
+                console.error("Lỗi:", error);
+                alert("Gửi thất bại!");
+            }
+        }
+
+        document.getElementById("deviceForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            postData("/api/devices", {
+                name: document.getElementById("deviceName").value,
+                type: document.getElementById("deviceType").value,
+                owner_id: document.getElementById("ownerId").value,
+                status: "online",
+                registered_at: new Date().toISOString()
+            });
+        });
+
+        document.getElementById("sensorForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            postData("/api/sensors", {
+                name: document.getElementById("sensorName").value,
+                type: document.getElementById("sensorType").value,
+                owner_id: document.getElementById("sensorOwnerId").value,
+                status: "active",
+                registered_at: new Date().toISOString()
+            });
+        });
+
+        document.getElementById("sensorDataForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            postData("/api/sensor-data", {
+                sensor_id: document.getElementById("sensorId").value,
+                timestamp: new Date().toISOString(),
+                value: document.getElementById("sensorValue").value
+            });
+        });
+    </script>
+</body>
+</html>

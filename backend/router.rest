@@ -1,0 +1,28 @@
+//sign up
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "email": "test@example.com",
+    "password": "12345678"
+}
+
+###
+//sign in
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "12345678"
+}
+
+
+###
+//authentication
+GET http://localhost:5000/api/auth/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3ZDcwNDY3YzhjMjc5NDI5MDllYmVjYiIsImlhdCI6MTc0MjE0NDY5MSwiZXhwIjoxNzQyMjMxMDkxfQ.A8NcL_U6ehV0iCMreCdVySu2Ywhe3cxP0-uHyfHZUzI
+
+
+

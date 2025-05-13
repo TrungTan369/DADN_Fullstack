@@ -1,0 +1,24 @@
+.customScrollbar::-webkit-scrollbar {
+    width: 6px; /* Thanh cuộn mỏng hơn */
+  }
+  
+  .customScrollbar::-webkit-scrollbar-track {
+    background: #3a3a3a; /* Màu nền của track */
+    border-radius: 10px;
+  }
+  
+  .customScrollbar::-webkit-scrollbar-thumb {
+    background: #6b7280; /* Màu của thanh cuộn */
+    border-radius: 10px;
+    border: 1px solid #3a3a3a; /* Viền nhẹ để tạo độ tương phản */
+  }
+  
+  .customScrollbar::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af; /* Hiệu ứng hover sáng hơn */
+  }
+  
+  /* Firefox */
+  .customScrollbar {
+    scrollbar-width: thin; /* Thanh cuộn mỏng */
+    scrollbar-color: #6b7280 #3a3a3a; /* Màu của thumb và track */
+  }
